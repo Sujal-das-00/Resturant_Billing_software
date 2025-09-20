@@ -1,11 +1,11 @@
-const mongoose = require ('mongoose');
-const { type } = require('os');
-const personSchema = new mongoose.Schema({
-    name:{
+import mongoose from 'mongoose';
+
+const tableOrderSchema = new mongoose.Schema({
+    customerName:{
         type:String,
         required:true
     },
-    Table_no:{
+    tableNumber:{
         type:Number,
         required:true
     },
@@ -14,11 +14,11 @@ const personSchema = new mongoose.Schema({
         quantity:{type:Number,required:true},
         price:{type:Number,required:true}}
     ],
-    total_price:{
+    totalPrice:{
         type:Number,
         required:true
     },
-    status:{
+    paymentStatus:{
         type:String,
         default:"Pending",
     },
@@ -27,7 +27,7 @@ const personSchema = new mongoose.Schema({
         enum:["card","cash","upi"],
         required:true
     },
-    table_status:{
+    tableStatus:{
         type:String,
         default:"Booked"
     },
@@ -37,5 +37,5 @@ const personSchema = new mongoose.Schema({
     }
 });
 
-const Person = mongoose.model('Person',personSchema);
-module.exports = Person;
+const tableOrder = mongoose.model('tableOrder',tableOrderSchema);
+export default tableOrder;
