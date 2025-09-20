@@ -20,7 +20,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 
-app.use(cors()); 
+app.use(cors());
 app.use(bodyParser.json());
 export const server = http.createServer(app);
 
@@ -71,16 +71,17 @@ io.on('connection', (socket) => {
 // })
 
 
-//home page
-app.use(express.static(path.join(__dirname, 'public')));
-app.get(/(.*)/, (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'sender.html'));
-});
 
 //temperory 
 app.get('/get', async (req, res) => {
-    const get = await tableOrder.find();
-    res.send(get);
+    try {
+        const get = await tableOrder.find();
+        res.send(get);
+    }
+    catch (error) {
+        res.status(500);
+    }
+
 })
 
 
@@ -93,8 +94,8 @@ app.get('/getSalesData', async (req, res) => {
     const Yearlysale = await getYearlyTotal();
     res.status(200).json({ dailySale: DailySale, monthlysale: Monthlysale, yealysale: Yearlysale });
 })
-app.get('/check',async (req,res)=>{
-    
+app.get('/check', async (req, res) => {
+
     res.send(await Sales.find());
 })
 
@@ -256,6 +257,16 @@ app.patch('/api/update/bookingstatus', async (req, res) => {
         res.status(500).json({ message: 'An internal server error occurred.', error: err.message });
     }
 });
+
+//home page
+app.use(express.static(path.join(__dirname, 'public')));
+app.get(/(.*)/, (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'sender.html'));
+});
+
+
+
+
 
 const PORT = process.env.PORT || 2300;
 server.listen(PORT, () => { console.log(`server is up at ${PORT}`) });
