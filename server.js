@@ -2,6 +2,9 @@ import express from 'express';
 import http from 'http';
 import cors from 'cors';
 import { Server } from 'socket.io';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 import './db.js';
 import bodyParser from 'body-parser';
 // Model and Query imports
@@ -12,12 +15,15 @@ import { getTodaysTotal } from "./dbQuerres/dailySaleQueerry.js";
 import { getMonthlyTotal } from "./dbQuerres/monthlySalesQuerry.js";
 import { getYearlyTotal } from "./dbQuerres/yearlysaleQuerry.js";
 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express();
 
 app.use(cors()); 
 app.use(bodyParser.json());
-app.use(express.static("public")); 
 export const server = http.createServer(app);
+
 const io = new Server(server, {
     cors: {
         origin: "*",
@@ -66,9 +72,11 @@ io.on('connection', (socket) => {
 
 
 //home page
-app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/public/sender.html");
+app.use(express.static(path.join(__dirname, 'public')));
+app.get(/(.*)/, (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'sender.html'));
 });
+
 //temperory 
 app.get('/get', async (req, res) => {
     const get = await tableOrder.find();
@@ -249,5 +257,5 @@ app.patch('/api/update/bookingstatus', async (req, res) => {
     }
 });
 
-
-server.listen(2300, () => { console.log("server is up at 2300") });
+const PORT = process.env.PORT || 2300;
+server.listen(PORT, () => { console.log(`server is up at ${PORT}`) });
