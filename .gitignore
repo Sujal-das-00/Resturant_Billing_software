@@ -3,3 +3,39 @@ cred.json
 viewer.html
 UBby9gk7VO2ZjepQ
 .env
+
+
+dummy data for orderstaable
+{
+  "customerName": null,
+  "tableNumber": 1,
+  "items": [],
+  "totalPrice": 0,
+  "paymentStatus": null,
+  "paymentMethod": null,
+  "tableStatus": "Vacant",
+  "tempToken": null
+}
+
+dummy data for post orderstaable
+
+   {"customerName": "Ravi Kumar",
+    "tableNumber": 1,
+    "items": [
+      {
+        "item_name": "Paneer Butter Masala",
+        "quantity": 1,
+        "price": 280
+      },
+      {
+        "item_name": "Garlic Naan",
+        "quantity": 2,
+        "price": 60
+      }
+    ],
+    "totalPrice": 400,
+    "paymentStatus": "Paid",
+    "paymentMethod": "upi",
+    "tableStatus": "Booked",
+    "tempToken": "a1b2c3d4e5"
+  }

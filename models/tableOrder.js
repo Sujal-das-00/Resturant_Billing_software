@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 const tableOrderSchema = new mongoose.Schema({
     customerName:{
         type:String,
-        required:true
     },
     tableNumber:{
         type:Number,
@@ -24,8 +23,7 @@ const tableOrderSchema = new mongoose.Schema({
     },
     paymentMethod:{
         type:String,
-        enum:["card","cash","upi"],
-        required:true
+        enum:["card","cash","upi",null],
     },
     tableStatus:{
         type:String,
@@ -33,7 +31,6 @@ const tableOrderSchema = new mongoose.Schema({
     },
     tempToken:{
         type:String,
-        required:true
     }
 });
 
