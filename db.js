@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-// import 'dotenv/config'; 
-// const mongoUrl = process.env.MONGO_URI; 
-const mongoUrl = 'mongodb://localhost:27017/hotels'
+import 'dotenv/config'; 
+const mongoUrl = process.env.MONGO_URI; 
+// const mongoUrl = 'mongodb://localhost:27017/hotels'
 mongoose.connect(mongoUrl)
 
 const db = mongoose.connection;
