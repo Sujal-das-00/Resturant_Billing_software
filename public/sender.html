@@ -1,57 +1,58 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Sender</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  </head>
 
-<head>
-  <title>Sender</title>
-  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-</head>
+  <body>
+    <h2>Order Sender</h2>
+    <button id="sendBtn">Send Order</button>
+    <button id="sendParcel">send parcel</button>
 
-<body>
-  <h2>Order Sender</h2>
-  <button id="sendBtn">Send Order</button>
-  <button id="sendParcel">send parcel</button>
+    <script>
+      // Connect to backend
+      const socket = io("http://127.0.0.1:2300"); //MAKING AN WEBSOCKET
+      //Alert the user that he is connected to the backend
+      socket.on("connect", () => {
+        alert("Connection created!");
+      });
 
-  <script>
-    // Connect to backend
-    const socket = io("http://127.0.0.1:2300");//MAKING AN WEBSOCKET
-    //Alert the user that he is connected to the backend
-    socket.on("connect", () => {
-      alert("Connection created!");
-    });
-
-    document.getElementById("sendBtn").addEventListener("click", async () => {
-      const order = {
-        tableNo: 1,
-        name: "sujal das",
-        status: "Booked",
-        items: [{ items_name: "paneer", quantity: 2, price: 100 },
-        { items_name: "nan", quantity: 5, price: 100 }
-        ],
-        paymentStatus: "Paid",
-        total_price: 1000,
-        paymentMethod: "upi"
-      };
-      // Emit order via Socket.IO
-      await socket.emit("order", order);
-      console.log("📤 Sent order:", order);
-    });
-    document.getElementById("sendParcel").addEventListener("click", async () => {
-      const simpleId = Math.random().toString(36).substring(2);
-      const parcel = {
-        id:simpleId,
-        name: "sujal das",
-        items: [{ items_name: "paneer", quantity: 2, price: 100 },
-        { items_name: "chicken tikka masala", quantity: 5, price: 600 }
-        ],
-        paymentStatus: "Paid",
-        total_price: 1000,
-        paymentMethod: "upi"
-      };
-      await socket.emit("parcel", parcel);
-      console.log("📤 Sent parcel:", parcel
-      );
-    })
-  </script>
-</body>
-
+      document.getElementById("sendBtn").addEventListener("click", async () => {
+        const order = {
+          tableNo: 1,
+          name: "sujal das",
+          status: "Booked",
+          items: [
+            { items_name: "paneer", quantity: 2, price: 100 },
+            { items_name: "nan", quantity: 5, price: 100 },
+          ],
+          paymentStatus: "Paid",
+          total_price: 1000,
+          paymentMethod: "upi",
+        };
+        // Emit order via Socket.IO
+        await socket.emit("order", order);
+        console.log("📤 Sent order:", order);
+      });
+      document
+        .getElementById("sendParcel")
+        .addEventListener("click", async () => {
+          const simpleId = Math.random().toString(36).substring(2);
+          const parcel = {
+            id: simpleId,
+            name: "sujal das",
+            items: [
+              { items_name: "paneer", quantity: 2, price: 100 },
+              { items_name: "chicken tikka masala", quantity: 5, price: 600 },
+            ],
+            paymentStatus: "Paid",
+            total_price: 1000,
+            paymentMethod: "upi",
+          };
+          await socket.emit("parcel", parcel);
+          console.log("📤 Sent parcel:", parcel);
+        });
+    </script>
+  </body>
 </html>
