@@ -24,11 +24,11 @@ const SalesSchema = new mongoose.Schema({
   Payment_Metod: {
     type: String,
     required: true,
+    default:"upi"
   },
   Total_bill: {
     type: Number,
-    required: true,
-    default:"upi"
+    required: true
   },
   Platform_charge: {
     type: Number,
