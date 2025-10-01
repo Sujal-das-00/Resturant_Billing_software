@@ -145,7 +145,7 @@ app.patch("/api/orders", async (req, res) => {
   try {
     const { tableNumber, ...updateData } = req.body;
 
-    if (tableNumber > 5) {
+    if (tableNumber > 15) {
       return res.status(400).json({ message: "Table limit exceeded" });
     }
     // Basic validation: Ensure tableNumber is provided
