@@ -205,7 +205,7 @@ app.patch("/api/update/bookingstatus", async (req, res) => {
           customerName: null,
           items: [],
           totalPrice: 0,
-          paymentStatus: "pending",
+          paymentStatus: null,
           paymentMethod: null,
           tableStatus: "Vacant",
           tempToken: null,

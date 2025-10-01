@@ -28,6 +28,7 @@ const SalesSchema = new mongoose.Schema({
   Total_bill: {
     type: Number,
     required: true,
+    default:"upi"
   },
   Platform_charge: {
     type: Number,
