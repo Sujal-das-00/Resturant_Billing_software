@@ -21,11 +21,11 @@ const tableOrderSchema = new mongoose.Schema({
   },
   paymentStatus: {
     type: String,
-    default: "Pending",
+    default: "null",
   },
   paymentMethod: {
     type: String,
-    enum: ["card", "cash", "upi", null],
+    enum: ["card", "cash", "upi", "null"],
   },
   tableStatus: {
     type: String,
