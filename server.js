@@ -202,13 +202,13 @@ app.patch("/api/update/bookingstatus", async (req, res) => {
       { tableNumber: tableNumber },
       {
         $set: {
-          customerName: null,
+          customerName: "",
           items: [],
           totalPrice: 0,
-          paymentStatus: null,
-          paymentMethod: null,
+          paymentStatus: "null",
+          paymentMethod: "null",
           tableStatus: "Vacant",
-          tempToken: null,
+          tempToken: "",
         },
       },
       { new: true }
@@ -245,9 +245,9 @@ app.patch("/api/rejectOrder/:table_no", async (req, res) => {
           customerName: "",
           items: [],
           totalPrice: 0,
-          paymentStatus: "Pending",
-          paymentMethod: null,
-          tableStatus: "Available",
+          paymentStatus: "null",
+          paymentMethod: "null",
+          tableStatus: "Vacant",
         },
       },
       { new: true }
