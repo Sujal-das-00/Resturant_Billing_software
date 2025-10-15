@@ -24,7 +24,7 @@ const SalesSchema = new mongoose.Schema({
   Payment_Metod: {
     type: String,
     required: true,
-    default:"upi"
+    default:"Cash"
   },
   Total_bill: {
     type: Number,

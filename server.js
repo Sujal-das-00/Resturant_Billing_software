@@ -14,6 +14,7 @@ import parcelOrder from "./models/parcelOrders.js";
 import { getTodaysTotal } from "./dbQuerres/dailySaleQueerry.js";
 import { getMonthlyTotal } from "./dbQuerres/monthlySalesQuerry.js";
 import { getYearlyTotal } from "./dbQuerres/yearlysaleQuerry.js";
+import { getMonthlyChartData } from "./dbQuerres/totalsalesYearwise.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -361,6 +362,23 @@ app.get("/api/sync-data", async (req, res) => {
       .json({ message: "Failed to fetch data from the database." });
   }
 });
+
+app.get("/api/getdata/sales", async(req,res)=>{
+  try {
+    const targetYear = new Date().getFullYear();
+    if (isNaN(targetYear)) {
+      return res.status(400).json({ msg: 'Invalid year format provided.' });
+    }
+    const chartData = await getMonthlyChartData(targetYear);
+    res.status(200).json(chartData);
+    
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+
 
 //home page
 app.use(express.static(path.join(__dirname, "public")));
