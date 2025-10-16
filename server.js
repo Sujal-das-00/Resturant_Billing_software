@@ -15,7 +15,7 @@ import { getTodaysTotal } from "./dbQuerres/dailySaleQueerry.js";
 import { getMonthlyTotal } from "./dbQuerres/monthlySalesQuerry.js";
 import { getYearlyTotal } from "./dbQuerres/yearlysaleQuerry.js";
 import { getMonthlyChartData } from "./dbQuerres/totalsalesYearwise.js";
-import { getWeeklyChartData } from "./dbQuerres/weeklySalesquerry.js";
+import { getDailyChartData } from "./dbQuerres/weeklySalesquerry.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -385,7 +385,7 @@ app.get("/api/getdata/sales/weekly", async (req, res) => {
     const now = new Date();
     const targetYear = now.getFullYear();
     const targetMonth = now.getMonth() + 1;
-    const chartData = await getWeeklyChartData(targetYear, targetMonth);
+    const chartData = await getDailyChartData(targetYear, targetMonth);
     res.status(200).json(chartData);
   } catch (err) {
     console.error(err.message);
